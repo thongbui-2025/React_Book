@@ -29,7 +29,7 @@ const RegisterPage = () => {
 			navigate("/login");
 		} else {
 			// error
-			message.error("Đăng ký thất bại");
+			message.error("Email đã tồn tại, vui lòng nhập email khác");
 		}
 		setIsSubmit(false);
 	};

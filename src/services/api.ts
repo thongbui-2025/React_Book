@@ -7,15 +7,31 @@ export const registerAPI = (
 	phone: string
 ) => {
 	const baseURL = "/api/v1/user/register";
-	return axios.post<IBackendRes<IRegister>>(baseURL, {
-		fullName,
-		email,
-		password,
-		phone,
-	});
+	return axios.post<IBackendRes<IRegister>>(
+		baseURL,
+		{
+			fullName,
+			email,
+			password,
+			phone,
+		},
+		{
+			headers: {
+				delay: 1000,
+			},
+		}
+	);
 };
 
 export const loginAPI = (username: string, password: string) => {
 	const baseURL = "/api/v1/auth/login";
-	return axios.post<IBackendRes<ILogin>>(baseURL, { username, password });
+	return axios.post<IBackendRes<ILogin>>(
+		baseURL,
+		{ username, password },
+		{
+			headers: {
+				delay: 2000,
+			},
+		}
+	);
 };

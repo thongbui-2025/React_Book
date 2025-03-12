@@ -1,6 +1,6 @@
 import type { FormProps } from "antd";
-import { App, Button, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import { App, Button, Divider, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "@/services/api";
 import "./login.scss";
 import { useState } from "react";
@@ -12,7 +12,7 @@ type FieldType = {
 
 const Login = () => {
 	const [isSubmit, setIsSubmit] = useState(false);
-	const { message } = App.useApp();
+	const { message, notification } = App.useApp();
 	const navigate = useNavigate();
 
 	const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
@@ -23,11 +23,20 @@ const Login = () => {
 
 		if (res.data) {
 			// success
+			localStorage.setItem("access_token", res.data.access_token);
 			message.success("Đăng nhập thành công");
 			navigate("/");
 		} else {
 			// error
-			message.error("Đăng nhập thất bại");
+			notification.error({
+				message: "Có lỗi xảy ra!",
+				description:
+					res.message && Array.isArray(res.message)
+						? res.message[0]
+						: res.message,
+				duration: 5,
+				placement: "topRight",
+			});
 		}
 		setIsSubmit(false);
 	};
@@ -59,12 +68,16 @@ const Login = () => {
 							autoComplete="off"
 						>
 							<Form.Item<FieldType>
-								label="Họ tên"
+								label="Email"
 								name="username"
 								rules={[
 									{
 										required: true,
-										message: "Please input your username!",
+										message: "Please input your email!",
+									},
+									{
+										type: "email",
+										message: "Email không hợp lệ",
 									},
 								]}
 							>
@@ -95,7 +108,7 @@ const Login = () => {
 							</Form.Item>
 						</Form>
 					</section>
-					{/* <section>
+					<section>
 						<div className="divider-or">
 							<Divider />
 							<div>
@@ -103,11 +116,11 @@ const Login = () => {
 							</div>
 							<Divider />
 						</div>
-						<div className="social-login">
-							<p className="">Đã có tài khoản ?&nbsp;</p>
-							<Link to={"/login"}>Đăng nhập</Link>
+						<div className="social-register">
+							<p className="">Chưa có tài khoản ?&nbsp;</p>
+							<Link to={"/register"}>Đăng ký</Link>
 						</div>
-					</section> */}
+					</section>
 				</div>
 			</main>
 		</div>

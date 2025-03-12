@@ -35,4 +35,21 @@
 		font-size: 2rem;
 		font-weight: 600;
 	}
+	.divider-or {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.text-or {
+		text-align: center;
+		font-size: 1.5rem;
+		margin: 0 10px;
+	}
+
+	.social-register {
+		display: flex;
+		justify-content: center;
+	}
 }
