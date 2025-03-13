@@ -5,6 +5,8 @@ interface IAppContext {
 	setIsAuthenticated(value: boolean): void;
 	user: IUser | null;
 	setUser(value: IUser | null): void;
+	isAppLoading: boolean;
+	setIsAppLoading(value: boolean): void;
 }
 
 const CurrentAppContext = createContext<IAppContext | null>(null);
@@ -16,6 +18,7 @@ type TProps = {
 export const AppProvider = (props: TProps) => {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 	const [user, setUser] = useState<IUser | null>(null);
+	const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
 
 	return (
 		<CurrentAppContext.Provider
@@ -24,6 +27,8 @@ export const AppProvider = (props: TProps) => {
 				setIsAuthenticated,
 				user,
 				setUser,
+				isAppLoading,
+				setIsAppLoading,
 			}}
 		>
 			{props.children}

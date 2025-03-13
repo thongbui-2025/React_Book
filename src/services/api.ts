@@ -30,7 +30,7 @@ export const loginAPI = (username: string, password: string) => {
 		{ username, password },
 		{
 			headers: {
-				delay: 2000,
+				delay: 1500,
 			},
 		}
 	);
@@ -38,5 +38,9 @@ export const loginAPI = (username: string, password: string) => {
 
 export const fetchAccountAPI = () => {
 	const urlbackend = "/api/v1/auth/account";
-	return axios.get<IBackendRes<IFetchAccount>>(urlbackend);
+	return axios.get<IBackendRes<IFetchAccount>>(urlbackend, {
+		headers: {
+			delay: 1000,
+		},
+	});
 };
