@@ -8,12 +8,18 @@ import "styles/global.scss";
 import Register from "pages/client/auth/register";
 import Login from "pages/client/auth/login";
 import { App } from "antd";
+import { AppProvider } from "components/context/app.context";
+import HomePage from "pages/client/homepage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Layout />,
 		children: [
+			{
+				index: true,
+				element: <HomePage />,
+			},
 			{
 				path: "/about",
 				element: <About />,
@@ -37,7 +43,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<App>
-			<RouterProvider router={router} />
+			<AppProvider>
+				<RouterProvider router={router} />
+			</AppProvider>
 		</App>
 	</StrictMode>
 );

@@ -35,3 +35,8 @@ export const loginAPI = (username: string, password: string) => {
 		}
 	);
 };
+
+export const fetchAccountAPI = () => {
+	const urlbackend = "/api/v1/auth/account";
+	return axios.get<IBackendRes<IFetchAccount>>(urlbackend);
+};
